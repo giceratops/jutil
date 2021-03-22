@@ -2,8 +2,6 @@ package gh.giceratops.jutil.io;
 
 import java.io.*;
 
-import lombok.NonNull;
-
 public class RandomLittleEndianAccessFile implements DataInput, DataOutput, Closeable {
 
     private final RandomAccessFile raf;
@@ -173,7 +171,7 @@ public class RandomLittleEndianAccessFile implements DataInput, DataOutput, Clos
 
     @Deprecated
     @Override
-    public void writeBytes(@NonNull String s) throws IOException {
+    public void writeBytes(String s) throws IOException {
         this.raf.writeBytes(s);
     }
 
@@ -226,7 +224,7 @@ public class RandomLittleEndianAccessFile implements DataInput, DataOutput, Clos
     }
 
     @Override
-    public void writeUTF(@NonNull final String s) throws IOException {
+    public void writeUTF(final String s) throws IOException {
         this.raf.writeUTF(s);
     }
 }

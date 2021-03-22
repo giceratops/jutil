@@ -1,25 +1,27 @@
 package gh.giceratops.jutil.database;
 
-import lombok.NonNull;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Properties;
 import java.util.Set;
 
-@Slf4j
 public class DatabaseConnection extends ThreadLocal<Connection> {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(DatabaseConnection.class);
 
     private final Properties properties;
     private final Set<Connection> pool;
 
     private boolean closed;
 
-    public DatabaseConnection(@NonNull Properties properties) {
-        this.properties = properties;
+    public DatabaseConnection(Properties properties) {
+        this.properties = Objects.requireNonNull(properties);
         this.pool = new HashSet<>();
         this.closed = false;
     }

@@ -4,7 +4,7 @@
 
     <groupId>gh.giceratops</groupId>
     <artifactId>jutil</artifactId>
-    <version>1.1.0</version>
+    <version>0.0.0</version>
 
     <properties>
         <java.version>16</java.version>
@@ -15,7 +15,6 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
 
         <!-- versions -->
-        <lombok.version>1.18.16</lombok.version>
         <slf4j.version>1.7.30</slf4j.version>
         <jackson.version>2.12.1</jackson.version>
 
@@ -24,14 +23,6 @@
     </properties>
 
     <dependencies>
-        <!-- lombok -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
-            <scope>provided</scope>
-        </dependency>
-
         <!-- logging -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -43,6 +34,11 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
             <version>${jackson.version}</version>
         </dependency>
 
@@ -92,8 +88,8 @@
     <distributionManagement>
         <repository>
             <id>github</id>
-            <name>GitHub Giceratops Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/Giceratops/jutil</url>
+            <name>GitHub giceratops Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/giceratops/jutil</url>
         </repository>
     </distributionManagement>
 

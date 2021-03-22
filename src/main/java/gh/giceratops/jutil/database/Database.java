@@ -1,9 +1,9 @@
 package gh.giceratops.jutil.database;
 
 import gh.giceratops.jutil.Suppliers;
-import lombok.NonNull;
 
 import java.sql.Connection;
+import java.util.Objects;
 import java.util.Properties;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
@@ -15,9 +15,9 @@ public class Database {
     private final DatabaseConnection connection;
     private final Executor executor;
 
-    public Database(@NonNull final Properties props, @NonNull final Executor executor) {
-        this.connection = new DatabaseConnection(props);
-        this.executor = executor;
+    public Database(final Properties props, final Executor executor) {
+        this.connection = new DatabaseConnection(Objects.requireNonNull(props));
+        this.executor = Objects.requireNonNull(executor);
     }
 
     public Connection connection() {
@@ -32,15 +32,15 @@ public class Database {
         }
     }
 
-    public <O extends DatabaseObject<O>> CompletableFuture<O> load(@NonNull final O o) {
+    public <O extends DatabaseObject<O>> CompletableFuture<O> load(final O o) {
         return CompletableFuture.supplyAsync(Suppliers.unchecked(() -> o.load(this.connection())), executor);
     }
 
-    public <O extends DatabaseObject<O>> CompletableFuture<O> save(@NonNull final O o) {
+    public <O extends DatabaseObject<O>> CompletableFuture<O> save(final O o) {
         return CompletableFuture.supplyAsync(Suppliers.unchecked(() -> o.save(this.connection())), executor);
     }
 
-    public <O extends DatabaseObject<O>> CompletableFuture<O> delete(@NonNull final O o) {
+    public <O extends DatabaseObject<O>> CompletableFuture<O> delete(final O o) {
         return CompletableFuture.supplyAsync(Suppliers.unchecked(() -> o.delete(this.connection())), executor);
     }
 }

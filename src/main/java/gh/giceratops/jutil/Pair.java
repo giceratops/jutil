@@ -1,19 +1,8 @@
 package gh.giceratops.jutil;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.extern.jackson.Jacksonized;
-
 import java.util.Objects;
 
-@Jacksonized @Builder
-@Data
-@AllArgsConstructor
-public class Pair<L, R> {
-
-    private L left;
-    private R right;
+public record Pair<L, R>(L left, R right) {
 
     public static <L, R> Pair<L, R> of(final L left, final R right) {
         return new Pair<>(left, right);
