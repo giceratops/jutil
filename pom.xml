@@ -103,6 +103,9 @@
                         <version>${junit.jupiter.version}</version>
                     </dependency>
                 </dependencies>
+                <configuration>
+                    <argLine>-Duser.timezone=UTC</argLine>
+                </configuration>
             </plugin>
         </plugins>
     </build>

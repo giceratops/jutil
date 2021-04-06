@@ -22,13 +22,13 @@ class SafeDateFormatTest {
     void testFormat() {
         final var sdf = new SafeDateFormat("yyyy/MM/dd HH:mm:ss", "yyyy/MM/dd", "HH:mm:ss");
 
-        assertEquals("1970/01/01 01:00:00", sdf.format(Date.from(Instant.EPOCH)));
+        assertEquals("1970/01/01 00:00:00", sdf.format(Date.from(Instant.EPOCH)));
     }
 
     @Test
     void testParse() throws ParseException {
         final var sdf = new SafeDateFormat("yyyy/MM/dd HH:mm:ss", "yyyy/MM/dd", "HH:mm:ss");
 
-        assertEquals(Date.from(Instant.EPOCH), sdf.parse("1970/01/01 01:00:00"));
+        assertEquals(Date.from(Instant.EPOCH), sdf.parse("1970/01/01 00:00:00"));
     }
 }
