@@ -18,6 +18,7 @@
         <project.scm.id>github</project.scm.id>
 
         <!-- versions -->
+        <jetbrains.annotations>20.1.0</jetbrains.annotations>
         <slf4j.version>1.7.30</slf4j.version>
         <jackson.version>2.12.1</jackson.version>
 
@@ -26,6 +27,13 @@
     </properties>
 
     <dependencies>
+        <!-- annotations -->
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>${jetbrains.annotations}</version>
+        </dependency>
+
         <!-- logging -->
         <dependency>
             <groupId>org.slf4j</groupId>

@@ -33,14 +33,14 @@ public class Database {
     }
 
     public <O extends DatabaseObject<O>> CompletableFuture<O> load(final O o) {
-        return CompletableFuture.supplyAsync(Suppliers.unchecked(() -> o.load(this.connection())), executor);
+        return CompletableFuture.supplyAsync(Suppliers.unchecked(() -> o.load(this.connection())), this.executor);
     }
 
     public <O extends DatabaseObject<O>> CompletableFuture<O> save(final O o) {
-        return CompletableFuture.supplyAsync(Suppliers.unchecked(() -> o.save(this.connection())), executor);
+        return CompletableFuture.supplyAsync(Suppliers.unchecked(() -> o.save(this.connection())), this.executor);
     }
 
     public <O extends DatabaseObject<O>> CompletableFuture<O> delete(final O o) {
-        return CompletableFuture.supplyAsync(Suppliers.unchecked(() -> o.delete(this.connection())), executor);
+        return CompletableFuture.supplyAsync(Suppliers.unchecked(() -> o.delete(this.connection())), this.executor);
     }
 }

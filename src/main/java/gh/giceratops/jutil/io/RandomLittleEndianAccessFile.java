@@ -1,5 +1,7 @@
 package gh.giceratops.jutil.io;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.*;
 
 public class RandomLittleEndianAccessFile implements DataInput, DataOutput, Closeable {
@@ -224,7 +226,7 @@ public class RandomLittleEndianAccessFile implements DataInput, DataOutput, Clos
     }
 
     @Override
-    public void writeUTF(final String s) throws IOException {
+    public void writeUTF(final @NotNull String s) throws IOException {
         this.raf.writeUTF(s);
     }
 }
