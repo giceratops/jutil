@@ -15,6 +15,8 @@
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
 
+        <!-- project -->
+        <project.url>github.com/giceratops/jutil</project.url>
         <project.scm.id>github</project.scm.id>
 
         <!-- versions -->
@@ -22,6 +24,7 @@
         <slf4j.version>1.7.30</slf4j.version>
         <jackson.version>2.12.1</jackson.version>
 
+        <!-- test versions -->
         <junit.jupiter.version>5.5.2</junit.jupiter.version>
         <junit.platform.version>1.5.2</junit.platform.version>
     </properties>
@@ -76,16 +79,6 @@
 
     <build>
         <plugins>
-            <!-- Release -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-release-plugin</artifactId>
-                <version>3.0.0-M1</version>
-                <configuration>
-                    <tagNameFormat>v@{project.version}</tagNameFormat>
-                </configuration>
-            </plugin>
-
             <!-- Testing -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -112,14 +105,14 @@
 
     <distributionManagement>
         <repository>
-            <id>github</id>
+            <id>${project.scm.id}</id>
             <name>GitHub giceratops Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/giceratops/jutil</url>
+            <url>https://maven.pkg.${project.url}</url>
         </repository>
     </distributionManagement>
 
     <scm>
-        <developerConnection>scm:git:https://github.com/giceratops/jutil.git</developerConnection>
+        <developerConnection>scm:git:https://${project.url}.git</developerConnection>
     </scm>
 
 </project>
