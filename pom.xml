@@ -22,7 +22,7 @@
         <!-- versions -->
         <jetbrains.annotations>20.1.0</jetbrains.annotations>
         <slf4j.version>1.7.30</slf4j.version>
-        <jackson.version>2.12.1</jackson.version>
+        <jackson.version>2.12.3</jackson.version>
 
         <!-- test versions -->
         <junit.jupiter.version>5.5.2</junit.jupiter.version>
@@ -53,6 +53,21 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-parameter-names</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jdk8</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
             <version>${jackson.version}</version>
         </dependency>
 

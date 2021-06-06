@@ -3,19 +3,28 @@ package gh.giceratops.jutil;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.json.JsonMapper;
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 
 public class Json {
 
-    protected static final ObjectMapper MAPPER = new ObjectMapper()
+    protected static final ObjectMapper MAPPER = JsonMapper.builder() // or different mapper for other format
+            .addModule(new ParameterNamesModule())
+            .addModule(new Jdk8Module())
+            .addModule(new JavaTimeModule())
+            .build()
+            .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
             .setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.NONE)
             .setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY)
-            .enable(SerializationFeature.INDENT_OUTPUT)
-            .setDateFormat(new SimpleDateFormat("yyyy/MM/dd HH:mm:ss"));
+            .enable(SerializationFeature.INDENT_OUTPUT);
 
     public static <O> O parse(final byte[] json, final Class<O> oClass) {
         try {
