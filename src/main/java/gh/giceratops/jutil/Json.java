@@ -12,41 +12,72 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
+import java.io.Reader;
 
+/**
+ * Json utility class.
+ * Don't expose the underlying library.
+ */
 public class Json {
 
-    protected static final ObjectMapper MAPPER = JsonMapper.builder() // or different mapper for other format
-            .addModule(new ParameterNamesModule())
-            .addModule(new Jdk8Module())
-            .addModule(new JavaTimeModule())
-            .build()
-            .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-            .setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.NONE)
-            .setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY)
-            .enable(SerializationFeature.INDENT_OUTPUT);
+    private static final Json JSON = new Json();
 
-    public static <O> O parse(final byte[] json, final Class<O> oClass) {
+    public static <O> O parse(final String json, final Class<O> oClass) {
+        return JSON.asObject(json, oClass);
+    }
+
+    public static String stringify(final Object o) {
+        return JSON.asString(o);
+    }
+
+    private final ObjectMapper mapper;
+
+    public Json() {
+        this(JsonMapper.builder()
+                .addModule(new ParameterNamesModule())
+                .addModule(new Jdk8Module())
+                .addModule(new JavaTimeModule())
+                .build()
+                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+                .setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.NONE)
+                .setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY)
+                .enable(SerializationFeature.INDENT_OUTPUT)
+        );
+    }
+
+    public Json(final ObjectMapper mapper) {
+        this.mapper = mapper;
+    }
+
+    public String asString(final Object o) {
         try {
-            return MAPPER.readValue(json, oClass);
+            return this.mapper.writeValueAsString(o);
+        } catch (final JsonProcessingException e) {
+            throw Exceptions.runtime(e, "Error parsing object (%s) into JSON", o);
+        }
+    }
+
+    public <O> O asObject(final String json, final Class<O> oClass) {
+        try {
+            return this.mapper.readValue(json, oClass);
+        } catch (final JsonProcessingException e) {
+            throw Exceptions.runtime(e, "Error parsing string (%s) into object", json);
+        }
+    }
+
+    public <O> O asObject(final byte[] json, final Class<O> oClass) {
+        try {
+            return this.mapper.readValue(json, oClass);
         } catch (final IOException e) {
             throw Exceptions.runtime(e, "Error parsing byte[] (%s) into object", Strings.hex(json));
         }
     }
 
-    public static <O> O parse(final String json, final Class<O> oClass) {
+    public <O> O asObject(final Reader reader, final Class<O> oClass) {
         try {
-            return MAPPER.readValue(json, oClass);
-        } catch (final JsonProcessingException e) {
-            throw Exceptions.runtime(e, "Error parsing JSON (%s) into object", json);
-        }
-    }
-
-    public static String stringify(final Object o) {
-        try {
-            return MAPPER.writeValueAsString(o);
-        } catch (final JsonProcessingException e) {
-            throw Exceptions.runtime(e, "Error parsing object (%s) into JSON", o);
+            return this.mapper.readValue(reader, oClass);
+        } catch (final IOException e) {
+            throw Exceptions.runtime(e, "Error parsing reader (%s) into object", reader);
         }
     }
 }
