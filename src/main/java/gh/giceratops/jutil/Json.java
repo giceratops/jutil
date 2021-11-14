@@ -27,7 +27,12 @@ public class Json {
     }
 
     public static String stringify(final Object o) {
-        return JSON.asString(o);
+        return stringify(o, false);
+    }
+
+    public static String stringify(final Object o, final boolean printClass) {
+        return (printClass ? o.getClass().getSimpleName() + " " : "")
+                + JSON.asString(o);
     }
 
     private final ObjectMapper mapper;
