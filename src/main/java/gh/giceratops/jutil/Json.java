@@ -50,7 +50,7 @@ public class Json {
         );
     }
 
-    public Json(final ObjectMapper mapper) {
+    private Json(final ObjectMapper mapper) {
         this.mapper = mapper;
     }
 
