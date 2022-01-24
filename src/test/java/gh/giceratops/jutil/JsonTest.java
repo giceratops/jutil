@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class JsonTest {
 
     private static final Point POINT_OBJ = new Point(1, 2);
-    private static final String POINT_JSON = "{\"x\": 1, \"y\": 2}";
+    private static final String POINT_JSON = "{\"x\": 1.0, \"y\": 2.0}";
 
     @Test
     public void stringifyPointTest() {
