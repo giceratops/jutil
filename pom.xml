@@ -5,7 +5,7 @@
 
     <groupId>gh.giceratops</groupId>
     <artifactId>jutil</artifactId>
-    <version>0.0.0-SNAPSHOT</version>
+    <version>0.0.1-SNAPSHOT</version>
 
     <properties>
         <java.version>17</java.version>
@@ -20,12 +20,12 @@
         <project.scm.id>github</project.scm.id>
 
         <!-- versions -->
-        <jetbrains.annotations>20.1.0</jetbrains.annotations>
-        <slf4j.version>1.7.30</slf4j.version>
-        <jackson.version>2.12.3</jackson.version>
+        <jetbrains.annotations>22.0.0</jetbrains.annotations>
+        <slf4j.version>1.7.33</slf4j.version>
+        <jackson.version>2.13.1</jackson.version>
 
         <!-- test versions -->
-        <junit.jupiter.version>5.5.2</junit.jupiter.version>
+        <junit.jupiter.version>5.8.2</junit.jupiter.version>
         <junit.platform.version>1.5.2</junit.platform.version>
     </properties>
 
