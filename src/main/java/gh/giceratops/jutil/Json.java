@@ -12,6 +12,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Reader;
 
 /**
@@ -21,6 +22,10 @@ import java.io.Reader;
 public class Json {
 
     private static final Json JSON = new Json();
+
+    public static Json shared() {
+        return JSON;
+    }
 
     public static <O> O parse(final String json, final Class<O> oClass) {
         return JSON.asObject(json, oClass);
@@ -83,6 +88,14 @@ public class Json {
             return this.mapper.readValue(reader, oClass);
         } catch (final IOException e) {
             throw Exceptions.runtime(e, "Error parsing reader (%s) into object", reader);
+        }
+    }
+
+    public <O> O asObject(final InputStream is, final Class<O> oClass) {
+        try {
+            return this.mapper.readValue(is, oClass);
+        } catch (final IOException e) {
+            throw Exceptions.runtime(e, "Error parsing reader (%s) into object", is);
         }
     }
 }
