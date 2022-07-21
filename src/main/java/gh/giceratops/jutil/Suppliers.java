@@ -1,10 +1,12 @@
 package gh.giceratops.jutil;
 
+import lombok.NonNull;
+
 import java.util.function.Supplier;
 
 public class Suppliers {
 
-    public static <T> Supplier<T> unchecked(final CheckedSupplier<T> supplier) {
+    public static <T> Supplier<T> unchecked(@NonNull final CheckedSupplier<T> supplier) {
 
         return () -> {
             try {

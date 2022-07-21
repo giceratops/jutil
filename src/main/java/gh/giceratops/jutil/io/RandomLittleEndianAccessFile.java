@@ -1,6 +1,6 @@
 package gh.giceratops.jutil.io;
 
-import org.jetbrains.annotations.NotNull;
+import lombok.NonNull;
 
 import java.io.*;
 
@@ -13,7 +13,7 @@ public class RandomLittleEndianAccessFile implements DataInput, DataOutput, Clos
     }
 
     public final FileDescriptor getFD() throws IOException {
-        return this.raf.getFD(); 
+        return this.raf.getFD();
     }
 
     public final long getFilePointer() throws IOException {
@@ -226,7 +226,7 @@ public class RandomLittleEndianAccessFile implements DataInput, DataOutput, Clos
     }
 
     @Override
-    public void writeUTF(final @NotNull String s) throws IOException {
+    public void writeUTF(final @NonNull String s) throws IOException {
         this.raf.writeUTF(s);
     }
 }
