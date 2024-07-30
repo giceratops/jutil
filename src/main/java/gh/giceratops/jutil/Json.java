@@ -36,14 +36,17 @@ public class Json {
     }
 
     public static String stringify(final Object o, final boolean printClass) {
-        return (printClass ? o.getClass().getSimpleName() + " " : "")
-                + JSON.asString(o);
+        final var sb = new StringBuilder();
+        if (printClass) {
+            sb.append(o.getClass().getSimpleName()).append(" ");
+        }
+        return sb.append(JSON.asString(o)).toString();
     }
 
     private final ObjectMapper mapper;
 
     public Json() {
-        this(JsonMapper.builder()
+        this.mapper = JsonMapper.builder()
                 .addModule(new ParameterNamesModule())
                 .addModule(new Jdk8Module())
                 .addModule(new JavaTimeModule())
@@ -51,12 +54,7 @@ public class Json {
                 .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
                 .setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.NONE)
                 .setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY)
-                .enable(SerializationFeature.INDENT_OUTPUT)
-        );
-    }
-
-    private Json(final ObjectMapper mapper) {
-        this.mapper = mapper;
+                .enable(SerializationFeature.INDENT_OUTPUT);
     }
 
     public String asString(final Object o) {

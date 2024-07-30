@@ -12,11 +12,11 @@ public record Pair<L, R>(L left, R right) {
         return new Pair<>(Objects.requireNonNull(left), Objects.requireNonNull(right));
     }
 
-    public L leftOrDefault(final L def) {
+    public L leftOr(final L def) {
         return Objects.requireNonNullElse(this.left, def);
     }
 
-    public R rightOrDefault(final R def) {
+    public R rightOr(final R def) {
         return Objects.requireNonNullElse(this.right, def);
     }
 

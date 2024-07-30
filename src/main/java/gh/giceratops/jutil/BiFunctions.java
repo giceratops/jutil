@@ -14,7 +14,7 @@ public class BiFunctions {
         };
     }
 
-    public static interface CheckedBiFunction<U, T, R> {
+    public interface CheckedBiFunction<U, T, R> {
 
         R apply(final U u, final T t) throws Exception;
     }
