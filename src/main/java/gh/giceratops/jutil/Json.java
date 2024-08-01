@@ -57,6 +57,14 @@ public class Json {
                 .enable(SerializationFeature.INDENT_OUTPUT);
     }
 
+    public byte[] asBytes(final Object o) {
+        try {
+            return this.mapper.writeValueAsBytes(o);
+        } catch (final JsonProcessingException e) {
+            throw Exceptions.runtime(e, "Error parsing object (%s) into JSON", o);
+        }
+    }
+
     public String asString(final Object o) {
         try {
             return this.mapper.writeValueAsString(o);
