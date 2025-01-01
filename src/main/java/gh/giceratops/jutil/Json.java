@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.json.JsonMapper;
@@ -50,6 +51,7 @@ public class Json {
                 .addModule(new ParameterNamesModule())
                 .addModule(new Jdk8Module())
                 .addModule(new JavaTimeModule())
+                .enable(MapperFeature.ACCEPT_CASE_INSENSITIVE_ENUMS)
                 .build()
                 .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
                 .setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.NONE)
